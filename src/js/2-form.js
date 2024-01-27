@@ -6,13 +6,12 @@ form.addEventListener('input', formInput);
 form.addEventListener('submit', formSubmit)
 
 function formInput() {
-    const email = form.email.value;
-    const message = form.message.value;
+    const emailInp = form.email.value;
+    const messageInp = form.message.value;
     const data = {
-        email,
-        message,
+        email: emailInp.trim(),
+        message: messageInp.trim(),
     }
-    console.log(data)
     addToLocalStorage(storageKey, data);
 }
 
@@ -24,15 +23,20 @@ function addToLocalStorage(key, value) {
 
 
 function formSubmit(event) {
+const emailInp = form.elements.email.value;
+const messageInp = form.elements.message.value;
+
+  if (emailInp === '' || messageInp === '') {
+    return
+  }
     event.preventDefault();
-const email = form.elements.email.value;
-const message = form.elements.message.value;
+
 
   const data = {
-    email,
-    message,
+    email: emailInp.trim(),
+    message: messageInp.trim(),
   };
-
+ 
   console.log(data);
 form.reset();
   localStorage.removeItem(storageKey);
